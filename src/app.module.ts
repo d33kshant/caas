@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { FilesModule } from './files/files.module';
+import { CompressionModule } from './compression/compression.module';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import { FilesModule } from './files/files.module';
       isGlobal: true,
     }),
     FilesModule,
+    CompressionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
