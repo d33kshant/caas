@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { createGzip } from 'zlib';
 import { createReadStream, createWriteStream, unlink } from 'fs';
-import { MULTER_DEST } from 'src/constants';
+import { MULTER_DEST, PUBLIC_DEST } from 'src/constants';
 
 @Injectable()
 export class CompressionService {
@@ -10,7 +10,7 @@ export class CompressionService {
 
   compress(file: string) {
     const inputPath = `${this.configService.get<string>(MULTER_DEST)}${file}`;
-    const outputPath = `${this.configService.get<string>(MULTER_DEST)}${file}.gz`;
+    const outputPath = `${this.configService.get<string>(PUBLIC_DEST)}${file}.gz`;
 
     const gzip = createGzip();
     const input = createReadStream(inputPath);
