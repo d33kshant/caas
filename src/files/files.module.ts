@@ -8,6 +8,7 @@ import { BullModule } from '@nestjs/bull';
 import { FILES_QUEUE, MULTER_DEST } from 'src/constants';
 import { FilesProcessor } from './files.processor';
 import { CompressionModule } from 'src/compression/compression.module';
+import { randomUUID } from 'crypto';
 
 @Module({
   imports: [
@@ -17,6 +18,11 @@ import { CompressionModule } from 'src/compression/compression.module';
       useFactory: async (configService: ConfigService) => ({
         storage: diskStorage({
           destination: configService.get<string>(MULTER_DEST),
+          filename: function(_, file, callback) {
+            const originalname = file.originalname.replaceAll(' ', '_');
+            const filename = `${randomUUID()}_${originalname}`;
+            callback(null, filename);
+          }
         })
       }),
     }),
