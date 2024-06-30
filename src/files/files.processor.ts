@@ -9,7 +9,7 @@ export class FilesProcessor {
 
   @Process()
   process(job: Job<{ file: string }>) {
-    const { file } = job.data
+    const { file } = job.data;
     this.compressionService.compress(file);
   }
 }

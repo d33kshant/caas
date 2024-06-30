@@ -9,6 +9,6 @@ export class FilesController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   upload(@UploadedFile() file: Express.Multer.File) {
-    return this.filesService.enqueueFile(file.filename)
+    return this.filesService.enqueueFile(file.filename);
   }
 }
